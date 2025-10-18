@@ -1,0 +1,16 @@
+# Archivos de compilación
+/target/
+
+# Archivos de Rust
+**/*.rs.bk
+*.pdb
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Sistema
+.DS_Store
+Thumbs.db
