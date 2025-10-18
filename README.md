@@ -1,4 +1,4 @@
-# Hello Tiburona Contract
+# Hello Tiburona Contract 🦈
 
 # Tarea Clase 4
 
@@ -69,6 +69,7 @@ $ cargo check
    Checking hello-tiburona v0.0.0
     Finished dev profile [unoptimized + debuginfo] target(s) in 2.33s
 ```
+![Cargo check](img/Cargo%20check.png)
 
 ### Generación de WASM
 
@@ -77,6 +78,7 @@ $ cargo build --target wasm32-unknown-unknown --release
    Compiling hello-tiburona v0.0.0
     Finished release profile [optimized] target(s) in 1.07s
 ```
+![Verificación del WASM generado](img/Verificaci%C3%B3n%20del%20WASM%20generado.png)
 
 ### Archivo WASM generado
 
@@ -84,8 +86,9 @@ $ cargo build --target wasm32-unknown-unknown --release
 $ ls -lh target/wasm32-unknown-unknown/release/hello_tiburona.wasm
 -rw-r--r-- 2 julyh 197612 2.5K Oct 18 11:37 hello_tiburona.wasm
 ```
+![Existencia WASM](img/Existencia%20WASM.png)
 
-El contrato **compila correctamente**.
+El contrato **compila correctamente** ✅.
 
 ## Próximos pasos
 
