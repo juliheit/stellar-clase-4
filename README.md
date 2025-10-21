@@ -58,6 +58,7 @@ Ver detalles: [`v20.0.0/README.md`](./v20.0.0/README.md)
 * ✅ Contrato compilado y optimizado.
 * ✅ Tamaño final: **3.7KB** (optimizado, reducción del 35% respecto al no optimizado).
 
+![Running tests OK](./Running%20tests%20ok.png)
 
 Ver detalles: [`v23.1.4/README.md`](./v23.1.4/README.md)
 
