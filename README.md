@@ -7,9 +7,12 @@
 Este repositorio documenta la implementación completa de la **Tarea Clase 4**, mostrando el proceso de desarrollo con dos versiones diferentes de Soroban CLI debido a problemas de compatibilidad.
 
 ### Estructura del repositorio
+
+```text
 stellar-clase-4/
-├── v20.0.0/          # Primera implementación (limitada)
-└── v23.1.4/          # Implementación completa con WSL
+├── v20.0.0/    # Primera implementación (limitada)
+└── v23.1.4/    # Implementación completa con WSL
+```
 
 🎯 Versiones Implementadas
 ---
@@ -54,6 +57,7 @@ Ver detalles: [`v20.0.0/README.md`](./v20.0.0/README.md)
 * ✅ **6/6 tests pasando (100%)**.
 * ✅ Contrato compilado y optimizado.
 * ✅ Tamaño final: **3.7KB** (optimizado, reducción del 35% respecto al no optimizado).
+
 
 Ver detalles: [`v23.1.4/README.md`](./v23.1.4/README.md)
 
