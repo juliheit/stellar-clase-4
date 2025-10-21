@@ -2,114 +2,157 @@
 
 # Tarea Clase 4
 
-## Versión implementada
+📋 Resumen del Proyecto
+---
+Este repositorio documenta la implementación completa de la **Tarea Clase 4**, mostrando el proceso de desarrollo con dos versiones diferentes de Soroban CLI debido a problemas de compatibilidad.
 
-- **Soroban CLI:** 20.0.0
-- **Soroban SDK:** 20.5.0
+### Estructura del repositorio
+stellar-clase-4/
+├── v20.0.0/          # Primera implementación (limitada)
+└── v23.1.4/          # Implementación completa con WSL
 
-## Estado de la implementación
+🎯 Versiones Implementadas
+---
 
-✅ **Funciones implementadas:**
+| Versión | Soroban CLI | Soroban SDK | Entorno | Estado | Detalles |
+| :--- | :---: | :---: | :---: | :---: | :--- |
+| **Versión 1** | `v20.0.0` | `20.5.0` | Windows 10 | ✅ Compila, ⚠️ Limitaciones | [Issue reportado: #18](https://github.com/tu-usuario/tu-repo/issues/18) |
+| **Versión 2** | `v23.1.4` | `23.0.3` | WSL2 (Ubuntu en Windows 10) | ✅ Completo, tests pasando | **Recomendada para desarrollo** |
 
-- `initialize()` - Inicializa el contrato con admin
-- `hello()` - Registra saludos (sin validaciones manuales por limitación de SDK 20.x)
-- `get_contador()` - Consulta el contador de saludos
-- `get_ultimo_saludo()` - Consulta último saludo de un usuario
-- `reset_contador()` - Resetea contador (solo admin)
+🚀 El Proceso Completo
+---
 
-✅ **Conceptos aplicados:**
+### Fase 1: Primera implementación (`v20.0.0`)
+**Problemas encontrados:**
+* ❌ `soroban contract init` no disponible.
+* ❌ Versión más reciente no instalaba en Windows 10.
+* ❌ Tests incompatibles por dependencias `stellar-xdr`.
+* ❌ Falta de funcionalidades modernas.
 
-- Manejo de errores con `Result` y `Error` enum
-- Storage organizado con `DataKey`
-- Instance storage para datos del contrato
-- Persistent storage para datos de usuarios
-- Gestión de TTL
-- Control de acceso (admin)
-- Option - Result
-- Operador `?`
+**Logros:**
+* ✅ Código funcional y compilable.
+* ✅ Todos los conceptos implementados correctamente.
+* ✅ Generación de WASM exitosa.
+* ✅ Documentación del problema ([Issue #18](https://github.com/tu-usuario/tu-repo/issues/18)).
 
-## Diferencias con la tarea original
+Ver detalles: [`v20.0.0/README.md`](./v20.0.0/README.md)
 
-**Adaptaciones por versión 20.x:**
+### Fase 2: Migración a WSL y `v23.1.4`
+**Decisión:** Instalar WSL para tener un entorno Linux completo y acceder a la última versión de Soroban CLI.
 
-1. **Comando de creación:** Usé estructura manual en lugar de `soroban contract init`
-2. **Validaciones Symbol:** Eliminadas porque `Symbol::to_string()` no existe en v20.x
-   - El SDK ya valida internamente el Symbol
-3. **Tests:** No ejecutables por incompatibilidad de dependencias `stellar-xdr`
-   - El código compila correctamente
-   - Las funciones están implementadas según especificación
+**Proceso de instalación:**
+1. Instalación de `WSL2` en Windows 10.
+2. Configuración de Ubuntu.
+3. Instalación de Rust `1.90.0` en WSL.
+4. Instalación de Soroban CLI `v23.1.4`.
 
-## Archivos generados
+**Resultado:** ✅ Entorno profesional de desarrollo funcionando.
 
-- `target/wasm32-unknown-unknown/release/hello_tiburona.wasm`
+### Fase 3: Implementación completa (`v23.1.4`)
+**Logros:**
+* ✅ Todas las funciones implementadas según especificación.
+* ✅ **6/6 tests pasando (100%)**.
+* ✅ Contrato compilado y optimizado.
+* ✅ Tamaño final: **3.7KB** (optimizado, reducción del 35% respecto al no optimizado).
 
-## ¿Por qué estas diferencias?
+Ver detalles: [`v23.1.4/README.md`](./v23.1.4/README.md)
 
-### 1. Estructura del proyecto
+📊 Comparación de Versiones
+---
 
-**Problema:** El comando `soroban contract init` no existe en v20.0.0  
-**Solución:** Creación manual de estructura con `Cargo.toml`
+| Aspecto | `v20.0.0` | `v23.1.4` |
+| :--- | :---: | :---: |
+| **Entorno** | Windows 10 | WSL2 (Ubuntu) |
+| **Instalación** | Manual limitada | Completa desde `rustup.rs` |
+| **`soroban init`** | ❌ No disponible | ✅ Disponible |
+| **Tests** | ❌ No ejecutables | ✅ 6/6 pasando |
+| **Optimización** | ❌ No disponible | ✅ `soroban contract optimize` |
+| **Validaciones** | Internas del SDK | ✅ Manuales implementadas |
+| **Compilación** | ✅ Exitosa | ✅ Exitosa |
+| **Tamaño WASM** | 2.5KB | 3.7KB (optimizado) |
 
-### 2. Validación de Symbol
+🛠️ Funcionalidades Implementadas
+---
+Ambas versiones implementan el contrato completo con:
 
-**Problema:** El método `Symbol::to_string()` no existe en la versión 20.  
-**Solución:** Realizar validación interna del SDK
+#### Funciones principales:
+* `initialize(admin)` - Inicializa el contrato con administrador.
+* `hello(usuario, nombre)` - Registra saludos con validaciones.
+* `get_contador()` - Consulta el contador total de saludos.
+* `get_ultimo_saludo(usuario)` - Consulta último saludo de un usuario.
+* `reset_contador(caller)` - Resetea contador (**solo admin**).
 
-### 3. Tests unitarios
+#### Conceptos aplicados:
+* ✅ Manejo de errores con `Result<T, Error>`.
+* ✅ `Storage` organizado con `DataKey` enum.
+* ✅ `Instance storage` (datos del contrato).
+* ✅ `Persistent storage` (datos de usuarios).
+* ✅ Gestión de TTL (`Time To Live`).
+* ✅ Control de acceso basado en roles.
+* ✅ Validación de inputs.
 
-**Problema:** Incompatibilidad `stellar-xdr` con `arbitrary` trait  
-**Solución:** Tests escritos, verificación con compilación exitosa
+🔄 Diferencias Técnicas por Versión
+---
 
-## ✅ Verificación de funcionamiento
+### Cambios en la API de Tests (`v20` → `v23`)
+En Soroban `v23`, los errores se manejan con `Result` en lugar de causar `panic`, por lo que se usan métodos `try_*` para capturar errores.
 
-### Compilación exitosa
+| Versión | Código de Test |
+| :--- | :--- |
+| **v20.0.0 (Original)** | ```rust\n#[test]\n#[should_panic(expected = "NombreVacio")]\nfn test_nombre_vacio() {\n    client.hello(&usuario, &vacio);  // Esperaba panic\n}``` |
+| **v23.1.4 (Actual)** | ```rust\n#[test]\nfn test_nombre_vacio() {\n    let resultado = client.try_hello(&usuario, &vacio);\n    assert_eq!(resultado, Err(Ok(Error::NombreVacio)));\n}``` |
 
-```bash
-$ cargo check
-   Checking hello-tiburona v0.0.0
-    Finished dev profile [unoptimized + debuginfo] target(s) in 2.33s
-```
-![Cargo check](img/Cargo%20check.png)
+### Cambios en registro de contratos
+| Versión | Código de Registro |
+| :--- | :--- |
+| **v20.0.0** | ```rust\nlet contract_id = env.register_contract(None, HelloContract);``` |
+| **v23.1.4** | ```rust\nlet contract_id = env.register(HelloContract, ());``` |
 
-### Generación de WASM
+### Cambios en generación de `Address`
+En `v23` es necesario importar el trait `testutils::Address` explícitamente.
 
-```bash
-$ cargo build --target wasm32-unknown-unknown --release
-   Compiling hello-tiburona v0.0.0
-    Finished release profile [optimized] target(s) in 1.07s
-```
-![Verificación del WASM generado](img/Verificaci%C3%B3n%20del%20WASM%20generado.png)
+| Versión | Código de Generación de Address |
+| :--- | :--- |
+| **v20.0.0** | ```rust\nlet admin = Address::generate(&env);``` |
+| **v23.1.4** | ```rust\nuse soroban_sdk::testutils::Address as _;\nlet admin = Address::generate(&env);``` |
 
-### Archivo WASM generado
+📚 Aprendizajes 
+---
 
-```bash
-$ ls -lh target/wasm32-unknown-unknown/release/hello_tiburona.wasm
--rw-r--r-- 2 julyh 197612 2.5K Oct 18 11:37 hello_tiburona.wasm
-```
-![Existencia WASM](img/Existencia%20WASM.png)
+### Técnicos:
+* **WSL como solución:** Linux proporciona mejor compatibilidad para herramientas blockchain.
+* **Versiones:** Soroban evolucionan rápidamente.
+* **Adaptabilidad:** Capacidad de migrar entre versiones manteniendo funcionalidad.
+* **Testing en Rust:** Diferencias entre manejo de errores con `panic` vs `Result`.
+* **Optimización WebAssembly:** Importancia de reducir tamaño para blockchain (`soroban contract optimize`).
 
-El contrato **compila correctamente** ✅.
+### Metodológicos:
+* **Documentación del proceso:** Reportar *issues* ayuda a la comunidad.
+* **Perseverancia:** Superar obstáculos técnicos paso a paso.
+* **Investigación:** Buscar soluciones cuando las herramientas fallan.
+* **Backup de versiones:** Mantener implementaciones funcionales como referencia.
 
-## Próximos pasos
+### Personales:
+* Perseverancia y adaptación. Superar la incompatibilidad inicial de las versiones fue una prueba de persistencia 😅.
+* La importancia de documentar los problemas, no solamente es una cuestión técnica y de aprendizaje sino que hace a la cmomunidad, se construye en conjunto.
+* Los principios fundamentales (`storage`, errores, validaciones) son independientes de la versión.
 
-### Versión actual (v20.0.0)
 
-- ✅ Código funcional y compilable
-- ✅ Todos los conceptos implementados
-- ⚠️ Tests no ejecutables por limitaciones de dependencias
+🔗 Referencias
+---
+* [Documentación oficial de Soroban](https://soroban.stellar.org/docs/)
+* [Issue #18 - Problema con v20.0.0](https://github.com/tu-usuario/tu-repo/issues/18)
+* [Tarea original](https://link-a-la-tarea-original)
+* [Instalación de WSL](https://docs.microsoft.com/es-es/windows/wsl/install)
 
-### Versión futura (v21+)
+✅ Estado Final
+---
+* ✅ `v20.0.0`: Implementación funcional con limitaciones documentadas.
+* ✅ `v23.1.4`: Implementación completa con todos los tests pasando.
+* ✅ Documentación: Completa y útil para la comunidad.
+* ✅ Aprendizaje: Conceptos fundamentales de Soroban dominados.
 
-- [ ] Actualizar Soroban CLI a versión 21+
-- [ ] Implementar validaciones manuales de Symbol
-- [ ] Ejecutar suite completa de tests
-- [ ] Mantener ambas versiones en el repo para comparación
+---
 
-## 📚 Aprendizajes
+🎧 Código Futura 🦈- Stellar Blockchain
 
-Este proyecto me enseñó:
-
-1. **Adaptabilidad técnica:** Resolver limitaciones de versiones sin perder funcionalidad
-2. **Documentación clara:** Explicar decisiones técnicas y contexto
-3. **Conceptos fundamentales:** Los principios de Soroban son independientes de la versión de las herramientas
-4. **Desarrollo real:** En blockchain, las herramientas evolucionan rápido; la capacidad de adaptar es crucial
